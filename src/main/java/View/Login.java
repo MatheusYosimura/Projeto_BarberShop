@@ -4,6 +4,12 @@
  */
 package View;
 
+import javax.swing.JOptionPane;
+import Controller.LoginController;
+import Model.DAO.*;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author lym
@@ -13,8 +19,12 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+   private final LoginController controller;
+    
     public Login() {
         initComponents();
+        this.controller = new LoginController(this);
+        BancoDAO.inicia();
     }
 
     /**
@@ -26,6 +36,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPasswordField_Password = new javax.swing.JPasswordField();
         jTextField_Username = new javax.swing.JTextField();
         jLabel_Text_Login = new javax.swing.JLabel();
@@ -38,8 +49,18 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 750, 200, 60));
+
         jPasswordField_Password.setFont(new java.awt.Font("P052", 0, 24)); // NOI18N
         jPasswordField_Password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jPasswordField_Password.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPasswordField_Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField_PasswordActionPerformed(evt);
@@ -49,6 +70,7 @@ public class Login extends javax.swing.JFrame {
 
         jTextField_Username.setFont(new java.awt.Font("P052", 0, 24)); // NOI18N
         jTextField_Username.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField_Username.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTextField_Username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_UsernameActionPerformed(evt);
@@ -68,8 +90,8 @@ public class Login extends javax.swing.JFrame {
 
         jLabel_Text_Password.setFont(new java.awt.Font("P052", 0, 48)); // NOI18N
         jLabel_Text_Password.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Text_Password.setText("Login");
-        getContentPane().add(jLabel_Text_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, 60));
+        jLabel_Text_Password.setText("Barber Shop");
+        getContentPane().add(jLabel_Text_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, -1, 60));
 
         jLabel_Fundo_Login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_Fundo_Login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Fundo_Login.png"))); // NOI18N
@@ -91,6 +113,10 @@ public class Login extends javax.swing.JFrame {
     private void jTextField_UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_UsernameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.controller.botaoApertado();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +154,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel_Background;
     private javax.swing.JLabel jLabel_Fundo_Login;
     private javax.swing.JLabel jLabel_Icon;
@@ -137,4 +164,26 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField_Password;
     private javax.swing.JTextField jTextField_Username;
     // End of variables declaration//GEN-END:variables
+
+    public void exibeMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(null,mensagem);
+    }
+
+    public JPasswordField getjPasswordField_Password() {
+        return jPasswordField_Password;
+    }
+
+    public void setjPasswordField_Password(JPasswordField jPasswordField_Password) {
+        this.jPasswordField_Password = jPasswordField_Password;
+    }
+
+    public JTextField getjTextField_Username() {
+        return jTextField_Username;
+    }
+
+    public void setjTextField_Username(JTextField jTextField_Username) {
+        this.jTextField_Username = jTextField_Username;
+    }
+    
+    
 }
