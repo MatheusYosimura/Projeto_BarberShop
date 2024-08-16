@@ -1,5 +1,12 @@
 package View;
 
+import Controller.AgendaController;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,11 +18,14 @@ package View;
  */
 public class Agenda extends javax.swing.JFrame {
 
+    private final AgendaController controller;
     /**
      * Creates new form Agenda
      */
     public Agenda() {
         initComponents();
+        this.controller = new AgendaController(this);
+        iniciar();
     }
 
     /**
@@ -49,7 +59,7 @@ public class Agenda extends javax.swing.JFrame {
         jLabel_Opacity = new javax.swing.JLabel();
         jLabel_BackGround = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable_Tabela.setBackground(new java.awt.Color(255, 255, 255));
@@ -97,13 +107,21 @@ public class Agenda extends javax.swing.JFrame {
 
         jComboBox_Servico.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox_Servico.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox_Servico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cabelo", "Barba", "Lavagem", "Completo" }));
         jComboBox_Servico.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jComboBox_Servico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_ServicoItemStateChanged(evt);
+            }
+        });
+        jComboBox_Servico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_ServicoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox_Servico, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 340, 50));
 
         jComboBox_Cliente.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox_Cliente.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox_Cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matheus", "Juliana", "Julia", "Ana" }));
         jComboBox_Cliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jComboBox_Cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,12 +134,22 @@ public class Agenda extends javax.swing.JFrame {
         jTextField_ID.setForeground(new java.awt.Color(0, 0, 0));
         jTextField_ID.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_ID.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField_ID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_IDActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 340, 50));
 
         jTextField_Valor.setBackground(new java.awt.Color(255, 255, 255));
         jTextField_Valor.setForeground(new java.awt.Color(0, 0, 0));
         jTextField_Valor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField_Valor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTextField_Valor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_ValorActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField_Valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 340, 50));
 
         jTextField_Data.setBackground(new java.awt.Color(255, 255, 255));
@@ -192,8 +220,19 @@ public class Agenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton_AgendarActionPerformed
 
     private void jButton_AgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgendarActionPerformed
-        // TODO add your handling code here:
+        this.controller.agendar();
     }//GEN-LAST:event_jButton_AgendarActionPerformed
+
+    private void jComboBox_ServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ServicoActionPerformed
+        this.controller.atualizaValor();
+    }//GEN-LAST:event_jComboBox_ServicoActionPerformed
+
+    private void jTextField_ValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ValorActionPerformed
+    }//GEN-LAST:event_jTextField_ValorActionPerformed
+
+    private void jComboBox_ServicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_ServicoItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_ServicoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -253,4 +292,79 @@ public class Agenda extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_ID;
     private javax.swing.JTextField jTextField_Valor;
     // End of variables declaration//GEN-END:variables
+
+    private void iniciar() {
+        this.controller.atualizaTabela();
+        this.controller.atualizaCliente();
+        this.controller.atualizaServiço();
+    }
+
+    public JTable getjTable_Tabela() {
+        return jTable_Tabela;
+    }
+
+    public void setjTable_Tabela(JTable jTable_Tabela) {
+        this.jTable_Tabela = jTable_Tabela;
+    }
+
+    public JComboBox<String> getjComboBox_Cliente() {
+        return jComboBox_Cliente;
+    }
+
+    public void setjComboBox_Cliente(JComboBox<String> jComboBox_Cliente) {
+        this.jComboBox_Cliente = jComboBox_Cliente;
+    }
+
+    public JComboBox<String> getjComboBox_Servico() {
+        return jComboBox_Servico;
+    }
+
+    public void setjComboBox_Servico(JComboBox<String> jComboBox_Servico) {
+        this.jComboBox_Servico = jComboBox_Servico;
+    }
+
+    public JTextField getjTextField_Valor() {
+        return jTextField_Valor;
+    }
+
+    public void setjTextField_Valor(JTextField jTextField_Valor) {
+        this.jTextField_Valor = jTextField_Valor;
+    }
+
+    public JTextField getjTextField_Data() {
+        return jTextField_Data;
+    }
+
+    public void setjTextField_Data(JTextField jTextField_Data) {
+        this.jTextField_Data = jTextField_Data;
+    }
+
+    public JTextField getjTextField_Hora() {
+        return jTextField_Hora;
+    }
+
+    public void setjTextField_Hora(JTextField jTextField_Hora) {
+        this.jTextField_Hora = jTextField_Hora;
+    }
+
+    public JTextField getjTextField_ID() {
+        return jTextField_ID;
+    }
+
+    public void setjTextField_ID(JTextField jTextField_ID) {
+        this.jTextField_ID = jTextField_ID;
+    }
+
+    public JTextArea getjTextAreaObservacao() {
+        return jTextAreaObservacao;
+    }
+
+    public void setjTextAreaObservacao(JTextArea jTextAreaObservacao) {
+        this.jTextAreaObservacao = jTextAreaObservacao;
+    }
+
+    public void exibeMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(null,mensagem);
+    }
+    
 }

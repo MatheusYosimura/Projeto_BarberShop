@@ -38,5 +38,9 @@ public class Servico {
         return id;
     }
     
+    @Override
+    public String toString(){
+        return getDescricao();
+    }
     
 }

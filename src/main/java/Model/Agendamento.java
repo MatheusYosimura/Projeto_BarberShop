@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author lym
@@ -38,6 +39,14 @@ public class Agendamento {
         }
         */
     }
+
+    public Agendamento(int id, Cliente cliente, Servico servico, float valor, String data, String observacao) {
+        this(id,cliente,servico,data);
+        this.valor=valor;
+        this.observacao = observacao;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -74,7 +83,15 @@ public class Agendamento {
     public Date getData() {
         return data;
     }
+    
+    public String getDataFormatada(){
+        return new SimpleDateFormat("dd/MM/yyyy").format(data);
+    }
 
+    public String getHoraFormatada(){
+        return new SimpleDateFormat("HH:mm").format(data);
+    }
+    
     public void setData(Date data) {
         this.data = data;
     }

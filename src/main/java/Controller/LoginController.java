@@ -23,7 +23,7 @@ public class LoginController {
     }
     
     public void botaoApertado(){
-        Usuario usr = helper.getUsuario();
+        Usuario usr = helper.getModel();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario teste = usuarioDAO.selectNomeSenha(usr);
         if(teste!=null){
@@ -34,7 +34,5 @@ public class LoginController {
             view.exibeMensagem("Usuário ou Senha incorretos");
             helper.limpaTela();
         }
-        System.out.println("Nome: "+usr.getNome()+"\nSenha: "+usr.getSenha());
-        //helper.limpaTela();
     }
 }

@@ -9,14 +9,14 @@ import Model.Usuario;
  *
  * @author lym
  */
-public class LoginHelper {
+public class LoginHelper implements IHelper{
     private final Login view;
     
     public LoginHelper(Login view){
         this.view = view;
     }
     
-    public Usuario getUsuario(){
+    public Usuario getModel(){
         String nome = view.getjTextField_Username().getText();
         String senha = view.getjPasswordField_Password().getText();
         Usuario usr = new Usuario(0,nome,senha);

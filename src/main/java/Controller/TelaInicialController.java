@@ -21,7 +21,7 @@ public class TelaInicialController {
     public void moverAbaAgenda(){
         Agenda agenda = new Agenda();
         agenda.setVisible(true);
-        view.dispose();
+        //view.dispose();
     }
         
 }

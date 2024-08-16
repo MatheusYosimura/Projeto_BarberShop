@@ -16,7 +16,8 @@ public class DAOTester {
         BancoDAO.inicia();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         ClienteDAO clienteDAO = new ClienteDAO();
-        
+        ServicoDAO servicoDAO = new ServicoDAO();
+        AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
         /*----------------------------------------------------
          *   UsuarioDAO
          *----------------------------------------------------*/
@@ -53,7 +54,7 @@ public class DAOTester {
         }
         
         /*----------------------------------------------------
-         *   TesteDAO
+         *   ClienteDAO
          *----------------------------------------------------*/
         //Teste 5 = Testando selectIDNome
         Cliente teste5 = clienteDAO.selectIDNome(new Cliente(1,"Matheus",'M',"",""));
@@ -82,6 +83,62 @@ public class DAOTester {
             System.out.println("===Teste8===\nCliente atualizado com sucesso");
             System.out.println("Novo Nome: "+BancoDAO.listaCliente.get(0).getNome());
             System.out.println("Antigo Nome: "+teste8.getNome()+"\n===========");
+        }
+        
+         /*----------------------------------------------------
+         *   ServicoDAO
+         *----------------------------------------------------*/
+         //Teste 9 = Testando selectAll
+         ArrayList<Servico> teste9 = servicoDAO.selectAll();
+         if(teste9 == BancoDAO.listaServico){
+             System.out.println("===Teste9===\nLista de Serviços retornada com sucesso");
+            System.out.println(teste9+"\n==========="); 
+         }
+         
+         //Teste 10 = Testando deletaServico
+         Servico teste10 = BancoDAO.listaServico.get(0);
+         if(servicoDAO.deletaServico(teste10)){
+            System.out.println("===Teste10===\nServiço Deletado\n===========");
+         }
+         
+         //Teste11 = Testando atualizaServico
+         Servico teste11 = BancoDAO.listaServico.get(0);
+         if(servicoDAO.atualizaServico(new Servico(teste11.getId(),"Novo Serviço",0.0F))){
+             System.out.println("===Teste11===\nServiço atualizado com sucesso");
+            System.out.println("Nova Descrição: "+BancoDAO.listaServico.get(0).getDescricao());
+            System.out.println("Antiga Descrição: "+teste11.getDescricao()+"\n===========");
+         }
+         
+         /*----------------------------------------------------
+         *  AgendamentoDAO
+         *----------------------------------------------------*/
+         //Teste12 = Testando SelectAll
+         ArrayList<Agendamento> teste12 = agendamentoDAO.selectAll();
+         if(teste12 == BancoDAO.listaAgendamento){
+             System.out.println("===Teste12===\nLista de Agendamentos retornada com sucesso");
+            System.out.println(teste9+"\n==========="); 
+         }
+         
+        //Teste 13 = Testando selectId
+        Agendamento teste13 = agendamentoDAO.selectId(1);
+        if(teste13 != null){
+            System.out.println("===Teste13===\nAgendamento Encontrato\n===========");
+            //System.out.println(teste5.toString());
+        }
+
+        //Teste 14 = Testando deletaAgendamento
+        if(agendamentoDAO.deletaAgendamento(teste13)){
+            if(agendamentoDAO.selectId(teste13.getId())==null){
+                System.out.println("===Teste14===\nAgendamento Deletado\n===========");
+            }
+        }
+        
+        //Teste15 = Testando atualizaAgendamento
+        Agendamento teste15 = BancoDAO.listaAgendamento.get(0);
+        if(agendamentoDAO.atualizaAgendamento(new Agendamento(teste15.getId(),teste15.getCliente(),teste15.getServico(),"01/01/1999 14:15"))){
+            System.out.println("===Teste15===\nAgendamento atualizado com sucesso");
+            System.out.println("Nova Data: "+BancoDAO.listaAgendamento.get(0).getData());
+            System.out.println("Antiga Data: "+teste15.getData()+"\n===========");
         }
     }
 }
